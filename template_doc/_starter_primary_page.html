@@ -1,0 +1,169 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, viewport-fit=cover" />
+<title>Azures Mobile</title>
+<link href="https://fonts.googleapis.com/css?family=Poppins:200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i|Roboto:300,300i,400,400i,500,500i,700,700i,900,900i&display=swap" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="styles/style.css">
+<link rel="stylesheet" type="text/css" href="styles/framework.css">
+<link rel="stylesheet" type="text/css" href="fonts/css/fontawesome-all.min.css">    
+<link rel="apple-touch-icon" sizes="180x180" href="app/icons/icon-192x192.png">
+</head>
+    
+<!-- Body Classes Explainer-->
+<!-- 
+    You can use theme-light / theme-dark to change to 
+    light and dark colors or detect-theme to automatically 
+    change the color based on your system preferences if your 
+    device supports color scheme detection.
+
+    The data-highlight can be any of the colors 
+    found in the documentatio in secondary classes.
+    Or inside the menu-colors inside the data-highlight
+-->
+<body class="theme-light"  data-highlight="blue2">
+        
+    
+<!-- What is the DIV ID = Page -->
+<!--
+    All your content MUST be added inside the div ID page.
+    when you move from page to page only the content from
+    inside the div id page is changed.
+-->
+<div id="page">
+            
+    <!-- The page Preloader Spinner-->
+    <div id="page-preloader">
+        <div class="loader-main"><div class="preload-spinner border-highlight"></div></div>
+    </div>
+        
+    <!-- The Page Header -->
+    <!--
+        Remove header-auto-show to always show the small header 
+        More examples in components-headers.html
+    --> 
+	<div class="header header-fixed header-logo-app header-auto-show">
+        <a href="index.html" class="header-subtitle">Back to Media</a>
+		<a href="#" data-back-button class="header-icon header-icon-1"><i class="fas fa-arrow-left"></i></a>
+		<a href="#" data-toggle-theme class="header-icon header-icon-2"><i class="fas fa-lightbulb"></i></a>
+		<a href="settings.html" class="header-icon header-icon-3"><i class="fas fa-cog"></i></a>
+	</div>  
+    
+    
+    <!-- Page Content Class-->
+    <!--
+        All your menus, action sheets, header and footer menu must be placed
+        outside of the page-content class. Only place your content inside.
+        Any element that is fixed or comes out as a menu must be placed outside.
+    -->    
+    <div class="page-content">   
+        
+        <!-- The Blue background at the top of the page-->
+        <div data-height="150" class="page-title-bg bg-20"><!-- image --></div>
+        <div data-height="150" class="page-title-bg dark-mode-tint"><!-- contrast for dark mode --></div>
+        <div data-height="150" class="page-title-bg opacity-90 bg-highlight"><!-- background color --></div>
+        
+        <!-- This is the main title area. You can replace Enabled with your username -->
+        <!--
+            The greeting text can be edited in custom.js
+            Open custom.js and locate (CTRL+F on Windows, CMD+F on Mac) greetingMorning.
+            The text there can be updated to suit your needs.
+            By default, our page automatically changes the greeting based on the current time.
+        -->
+        <div class="page-title-large color-white bottom-30">
+            <h1 data-username="Enabled!" class="greeting-text"></h1>
+            <a href="#" data-menu="menu-main" class="shadow-huge scale-box bg-fade-gray2-dark"></a>
+        </div>
+                        
+        <!-- Here is where you place your page content -->
+        <div class="content-boxed shadow-large">
+            <div class="content bottom-0">
+                <p class="bottom-20">
+                    Start with your page descriptionn here. This will appear just under the page title area.
+                </p>
+            </div>
+        </div>        
+        
+        <div class="content-boxed shadow-large">
+            <div class="content">
+                <h5>What is a Primary Starter?</h5>
+                <p class="bottom-15">
+                    The primary starter is the page we used for the index. Where the top includes a greeting text and no other icons to bother your browsing experience.
+                </p>
+            </div>
+        </div>
+        
+        
+        <!-- Footer Loaded Externally for Global Editing-->
+        <div class="footer" data-footer-load="menu-footer.html"></div>
+
+    </div>
+        
+    <!--Footer Menu-->
+    <div id="footer-menu" class="footer-menu-5-icons footer-menu-style-1">
+        <a href="components.html">
+            <i data-feather="heart" data-feather-line="1" data-feather-size="21" data-feather-color="red2-dark" data-feather-bg="red2-fade-light"></i>
+            <span>Features</span>
+        </a>
+        <a href="media.html">
+            <i data-feather="image" data-feather-line="1" data-feather-size="21" data-feather-color="green1-dark" data-feather-bg="green1-fade-light"></i>
+            <span>Media</span>
+        </a>       
+        <a href="index.html" class="active-nav4">
+            <i data-feather="home" data-feather-line="1" data-feather-size="21" data-feather-color="blue2-dark" data-feather-bg="blue2-fade-dark"></i>
+            <span>Home</span>
+        </a>        
+        <a href="pages.html">
+            <i data-feather="file" data-feather-line="1" data-feather-size="21" data-feather-color="brown1-dark" data-feather-bg="brown1-fade-light"></i>
+            <span>Pages</span>
+        </a>
+        <a href="settings.html">
+            <i data-feather="settings" data-feather-line="1" data-feather-size="21" data-feather-color="gray2-dark" data-feather-bg="gray2-fade-light"></i>
+            <span>Settings</span>
+        </a>       
+        <div class="clear"></div>
+    </div>
+    
+    <!-- Main Sidebar Menu-->
+    <div id="menu-main"
+         class="menu menu-box-right menu-box-detached round-medium"
+         data-menu-active="nav-features"
+         data-menu-width="260" data-menu-effect="menu-over" data-menu-load="menu-main.html">
+    </div>    
+    
+    <!-- Share Menu-->
+    <div id="menu-share" 
+         class="menu menu-box-bottom menu-box-detached round-medium" 
+         data-menu-height="400" data-menu-effect="menu-over" data-menu-load="menu-share.html">
+    </div>        
+
+    <!-- Color Highlights Menu-->
+    <div id="menu-highlights" 
+         class="menu menu-box-bottom menu-box-detached round-medium" 
+         data-menu-height="480" data-menu-effect="menu-over" data-menu-load="menu-colors.html">
+    </div>    
+    
+
+    <!-- The menu hider is required for the dark overlay, and also to close the menus if tapped-->
+    <div class="menu-hider"></div>
+</div>
+
+<!--
+
+In case you want to add more scripts, add them under plugins.js script
+inside all your HTML Files. Remember, only the div id page is changed
+when you navigate to a different page. 
+
+All your custom javscript call functions must be added inside custom.js inside the
+init_template() function found at line 14. 
+
+If you need to refresh a page for a certain code to appear it means you palced your 
+call functions wrong. Place all JS scripts under plugins.js and place all JS code in init_template(); 
+
+-->
+<script type="text/javascript" src="scripts/jquery.js"></script>
+<script type="text/javascript" src="scripts/plugins.js"></script>
+<script type="text/javascript" src="scripts/custom.js"></script>
+</body>

@@ -49,7 +49,7 @@
                     data-feather-bg="green1-fade-light"></i>
                 <span>Media</span>
             </a>
-            <a href="index.html" class="active-nav4">
+            <a onclick="backHome()" class="active-nav4">
                 <i data-feather="home" data-feather-line="1" data-feather-size="21" data-feather-color="blue2-dark"
                     data-feather-bg="blue2-fade-dark"></i>
                 <span>Home</span>
@@ -134,8 +134,7 @@
             video: document.getElementById('preview')
         });
         scanner.addListener('scan', function (content) {
-            // console.log(content);
-            console.log('hai');
+            console.log(content);
         });
         Instascan.Camera.getCameras().then(function (cameras) {
             if (cameras.length > 0) {
@@ -146,5 +145,9 @@
         }).catch(function (e) {
             console.error(e);
         });
+
+        function backHome() {
+            location.href = "index.html";
+        }
     </script>
 </body>

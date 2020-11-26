@@ -1,0 +1,1 @@
+var endpoint = 'http://localhost/kssi_kurikulum/';

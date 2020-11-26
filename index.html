@@ -116,40 +116,14 @@
     <script type="text/javascript" src="scripts/jquery.js"></script>
     <script type="text/javascript" src="scripts/plugins.js"></script>
     <script type="text/javascript" src="scripts/custom.js"></script>
+    <script type="text/javascript" src="scripts/auth.js"></script>
+    <script type="text/javascript" src="scripts/apiServices.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
     <script>
-        var endpoint = 'http://localhost/kssi_kurikulum/';
-
-        $(document).ready(() => {
-            // let timerInterval
-            // Swal.fire({
-            //     title: 'Auto close alert!',
-            //     html: 'I will close in <b></b> milliseconds.',
-            //     timer: 2000,
-            //     timerProgressBar: true,
-            //     willOpen: () => {
-            //         Swal.showLoading()
-            //         timerInterval = setInterval(() => {
-            //             const content = Swal.getContent()
-            //             if (content) {
-            //                 const b = content.querySelector('b')
-            //                 if (b) {
-            //                     b.textContent = Swal.getTimerLeft()
-            //                 }
-            //             }
-            //         }, 100)
-            //     },
-            //     willClose: () => {
-            //         clearInterval(timerInterval)
-            //     }
-            // }).then((result) => {
-            //     /* Read more about handling dismissals below */
-            //     if (result.dismiss === Swal.DismissReason.timer) {
-            //         console.log('I was closed by the timer')
-            //     }
-            // })
-        });
+        //::BEGIN clear localStorage
+        localStorage.clear();
+        //::END clear localStorage
 
         function store() {
             var username = $("#username").val();
@@ -168,10 +142,10 @@
                 })
                 .then(response => response.json())
                 .then((data) => {
-                    console.log(data)
+                    authCheck(data);
                 })
                 .catch((err) => {
-                    console.log(err)
+                    swal.fire('Error, Please calls a cop');
                 });
         }
     </script>

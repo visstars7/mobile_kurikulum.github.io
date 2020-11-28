@@ -11,7 +11,7 @@ function getProfile(uniqueID, role) {
     formData.append('role', role);
     fetch(API, {
             method: 'post',
-            mode: 'no-cors',
+            mode: 'cors',
             credentials: 'omit',
             body: formData
         }).then(res => res.json())

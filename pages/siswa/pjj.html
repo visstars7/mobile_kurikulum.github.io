@@ -48,6 +48,7 @@
                     url(&quot;https://daily.jstor.org/wp-content/uploads/2018/08/punch_jack_ripper_cartoon_2_1050x700.jpg&quot;);">
                     <!-- image -->
                 </div>
+
                 <div data-height="210" class="page-title-bg dark-mode-tint" style="height: 210px;">
                     <!-- contrast for dark mode -->
                 </div>
@@ -55,87 +56,29 @@
                     <!-- background color -->
                 </div>
                 <div class="content-boxed shadow-small">
-                    <div class="profile-insta top-15 bottom-15">
-                        <div class="profile-left">
-                            <h1>Profile Siswa</h1>
-                            <div class="profile-right">
-                                <a href="#">
-                                    <img src="https://avatars1.githubusercontent.com/u/44547634?s=400&v=4"
-                                        style="width:84px;height:84px;border-radius:111px"
-                                        data-src="https://avatars1.githubusercontent.com/u/44547634?s=400&v=4"
-                                        class="preload-image bg-highlight shadow-large">
-                                </a>
-                            </div>
-                            <span style="font-weight: bold;">Nama:</span> <span id="name-teacher">Karla Black</span><br>
-                            <span style="font-weight: bold;">NISN:</span> <span id="nip-teacher">Baker Street</span><br>
-                            <span style="font-weight: bold;">Kewarnegaraan:</span> <span id="negara-teacher">Baker
-                                Street</span><br>
-                            <span style="font-weight: bold;">Alamat:</span> <span
-                                id="alamat-teacher">BakerStreet</span><br>
-                            <div class="clear"></div>
-                        </div>
-                    </div>
+                    <h3 style="padding:20px"><i class="fas fa-school right-20"></i>Pembelajaran jarak jauh</h3>
                     <div class="one-half">
-                        <a href="#"
+                        <a onlick="location.reload()"
                             class="left-15 button button-xs round-small shadow-large bg-blue2-dark button-full bottom-30"><i
-                                class="fa fa-edit right-10"></i> Update Profile</a>
+                                class="fas fa-sync right-10"></i>Refresh</a>
                     </div>
                     <div class="one-half last-column">
                         <a href="../../index.html" class="right-15 button button-xs round-small shadow-large button-border button-full
                             border-blue2-dark color-theme bg-transparent bottom-0"><i
                                 class="fas fa-sign-out-alt right-10"></i>Sign Out</a>
                     </div>
-                    <div class="clear"></div>
-
-                    <div class="divider bottom-0"></div>
                 </div>
-
-                <div class="content-boxed content-boxed-full shadow-large">
-                    <div class="content bottom-0">
-                        <h3 style="margin-top:25px">History Absensi</h3>
-                        <table class="table-borders">
-                            <tbody>
-                                <tr>
-                                    <th class="bg-dark2-dark">Hari</th>
-                                    <th class="bg-dark2-dark">Sesi</th>
-                                    <th class="bg-dark2-dark">Ruang</th>
-                                    <th class="bg-dark2-dark">Masuk</th>
-                                    <th class="bg-dark2-dark">Keluar</th>
-                                </tr>
-                                <tr>
-                                    <td class="bg-dark1-light">Senin</td>
-                                    <td class="bg-dark1-light">2</td>
-                                    <td class="bg-dark1-light">LAB RPL 2</td>
-                                    <td class="bg-dark1-light">07:00</td>
-                                    <td class="bg-dark1-light">09:10</td>
-                                </tr>
-                                <tr>
-                                    <td class="bg-dark1-light">Selasa</td>
-                                    <td class="bg-dark1-light">3</td>
-                                    <td class="bg-dark1-light">LAB RPL 1</td>
-                                    <td class="bg-dark1-light">08:30</td>
-                                    <td class="bg-dark1-light">10:10</td>
-                                </tr>
-                                <tr>
-                                    <td class="bg-dark1-light">Rabu</td>
-                                    <td class="bg-dark1-light">5</td>
-                                    <td class="bg-dark1-light">R-46</td>
-                                    <td class="bg-dark1-light">14:20</td>
-                                    <td class="bg-dark1-light">13:30</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                <div id="tugas">
                 </div>
             </div>
 
             <!-- Footer Menu-->
             <div id="footer-menu" class="footer-menu-5-icons footer-menu-style-1">
-                <a href="pjj.html">
+                <a href="pjj.html" class="active-nav4">
                     <i class="fas fa-chalkboard-teacher" aria-hidden="true" data-feather-bg="blue2-fade-dark"></i>
                     <span>PJJ</span>
                     <strong></strong></a>
-                <a href="home.html" class="active-nav4">
+                <a href="home.html">
                     <i class="fas fa-user-alt" aria-hidden="true" data-feather-bg="blue2-fade-dark"></i>
                     <span>My Profile</span>
                     <strong></strong></a>
@@ -234,23 +177,57 @@
                 var name = localStorage.getItem('nama');
                 var nip = localStorage.getItem('nip');
                 var role = localStorage.getItem('role');
-
-                // get profile
-                getProfile(nip, role);
-
-                var profile = localStorage.getItem('profile-detail');
-                profile = JSON.parse(profile);
-
+                var id_kelas = localStorage.getItem('id_kelas');
                 $("#greeting-name").attr('data-username', name);
-                $("#name-teacher").text(name);
-                $("#nip-teacher").text(nip);
-                $("#negara-teacher").text(profile.kewarganegaraan);
-                $("#alamat-teacher").text(profile.alamat);
 
+                // var profile = JSON.parse(localStorage.getItem('profile-detail'));
+
+                var API = `${endpoint}api-materi/get_where`;
+
+                data = new FormData();
+                data.append('db', 'db');
+                data.append('tb', 'v_materi_pjj');
+                data.append('kelas_id', id_kelas);
+
+                fetch(API, {
+                        method: 'post',
+                        mode: 'cors',
+                        credentials: 'omit',
+                        body: data
+                    }).then(res => res.json())
+                    .then((data) => {
+                        if (data.length > 0) {
+                            var table = [];
+                            $.each(data, (idx, val) => {
+                                table += `<div class="content-boxed content-boxed-full shadow-large">
+                                    <div class="content bottom-0">
+                                        <h5 class="top-5">${val.nama_kelas} - ${val.nama_mapel}</h5>
+                                        <p>Batas Penyerahan : ${val.waktu_penyerahan}</p>
+                                        <div class="one">
+                                            <a href="#"
+                                                class="button button-m shadow-small button-round-small bg-green2-dark button-full bottom-30" onclick="detail(${val.id_materi_pjj})"><i
+                                                    class="fas fa-search-plus right-10"></i>Detail</a>
+                                        </div>
+                                    </div>
+                                </div>`;
+                            });
+                        } else {
+                            table = `<div class="content-boxed content-boxed-full shadow-large">
+                                <div class="content bottom-0">
+                                    <h5 class="top-5 bottom-5 left-20">Tidak Ada Tugas, Untuk saat ini</h5>
+                                </div>
+                            </div>`
+                        }
+                        $("#tugas").html(table);
+                        // console.log(data);
+                    }).catch((err) => {
+                        swall.fire({
+                            title: 'Error Fetching',
+                            text: 'please contanct admin',
+                            icon: 'error',
+                            confirmButtonText: 'close'
+                        });
+                    })
             });
-
-            function onScan() {
-                location.href = '../scanner.html';
-            }
         </script>
     </body>

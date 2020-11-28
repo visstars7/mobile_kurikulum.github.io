@@ -1,10 +1,14 @@
 function getProfile(uniqueID, role) {
     API = `${endpoint}api-profile/get_profile`;
     formData = new FormData();
+    if (role == 'siswa') {
+        formData.append('nisn', uniqueID);
+    } else {
+        formData.append('nip', uniqueID);
+    }
 
-    formData.append('nip', uniqueID);
+
     formData.append('role', role);
-
     fetch(API, {
             method: 'post',
             mode: 'cors',

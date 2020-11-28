@@ -173,14 +173,13 @@
 
         <script>
             $(document).ready(() => {
+                localStorage.removeItem('id_materi');
                 // greeting
                 var name = localStorage.getItem('nama');
                 var nip = localStorage.getItem('nip');
                 var role = localStorage.getItem('role');
                 var id_kelas = localStorage.getItem('id_kelas');
                 $("#greeting-name").attr('data-username', name);
-
-                // var profile = JSON.parse(localStorage.getItem('profile-detail'));
 
                 var API = `${endpoint}api-materi/get_where`;
 
@@ -205,8 +204,9 @@
                                         <p>Batas Penyerahan : ${val.waktu_penyerahan}</p>
                                         <div class="one">
                                             <a href="#"
-                                                class="button button-m shadow-small button-round-small bg-green2-dark button-full bottom-30" onclick="detail(${val.id_materi_pjj})"><i
+                                                class="button button-m shadow-small button-round-small bg-green2-dark button-full bottom-30" onclick="detail()"><i
                                                     class="fas fa-search-plus right-10"></i>Detail</a>
+                                                    <input id="id-materi" type="hidden" value="${val.id_materi_pjj}"/>
                                         </div>
                                     </div>
                                 </div>`;
@@ -229,5 +229,11 @@
                         });
                     })
             });
+
+            function detail() {
+                var id_materi = $("#id-materi").val();
+                localStorage.setItem('id_materi', id_materi);
+                location.href = "materi_detail.html";
+            }
         </script>
     </body>

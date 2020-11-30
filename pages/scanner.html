@@ -14,11 +14,28 @@
     <link rel="stylesheet" type="text/css" href="../styles/framework.css">
     <link rel="stylesheet" type="text/css" href="../fonts/css/fontawesome-all.min.css">
     <link rel="apple-touch-icon" sizes="180x180" href="app/icons/icon-192x192.png">
+    <script type="text/javascript" src="../scripts/jquery.js"></script>
+    <!-- jQuery Modal -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
 </head>
 
 <body class="theme-light" data-highlight="blue2">
 
+    <!-- Modal HTML embedded directly into document -->
+    <div id="modal" class="modal" style="z-index: 999!important;">
+        <form id="form">
+
+        </form>
+    </div>
+
+    <!-- status input-->
+    <input type="hidden" id="status" name="status">
+
+    <!-- jenis input-->
+
     <div id="page">
+        <input type="hidden" id="jenis" name="jenis">
 
         <div id="page-preloader">
             <div class="loader-main">
@@ -34,37 +51,46 @@
         </div>
 
 
-        <div class="page-content">
-            <video id="preview"></video>
+        <div class="page-content" style="z-index: 0;">
+            <div style="padding: 20px;">
+                <video id="preview" autoplay="autoplay" class="active"
+                    style="transform: scaleX(-1);width: 100%;border-radius: 10px;"></video>
+            </div>
+            <div class="one-half top-50">
+                <a href="#" onclick="onValue(1)"
+                    class="left-15 button button-xs round-small shadow-large bg-blue2-dark button-full bottom-30"><i
+                        class="fa fa-paper-plane right-10"></i>Masuk</a>
+            </div>
+            <div class="one-half last-column top-50">
+                <a href="#" onclick="onValue(2)"
+                    class="right-15 button button-xs round-small shadow-large button-border button-full border-blue2-dark bg-red2-dark color-theme bg-transparent bottom-0"><i
+                        class="fa fa-sign-out mr-10"></i>Keluar</a>
+            </div>
+            <div class="one" id="btn-data-siswa"></div>
         </div>
         <!-- Footer Menu-->
-        <div id="footer-menu" class="footer-menu-5-icons footer-menu-style-1">
-            <a href="">
-                <i data-feather="heart" data-feather-line="1" data-feather-size="21" data-feather-color="red2-dark"
-                    data-feather-bg="red2-fade-light"></i>
-                <span>Features</span>
-            </a>
-            <a href="">
-                <i data-feather="image" data-feather-line="1" data-feather-size="21" data-feather-color="green1-dark"
-                    data-feather-bg="green1-fade-light"></i>
-                <span>Media</span>
-            </a>
-            <a onclick="backHome()" class="active-nav4">
-                <i data-feather="home" data-feather-line="1" data-feather-size="21" data-feather-color="blue2-dark"
-                    data-feather-bg="blue2-fade-dark"></i>
-                <span>Home</span>
-            </a>
-            <a href="">
-                <i data-feather="file" data-feather-line="1" data-feather-size="21" data-feather-color="brown1-dark"
-                    data-feather-bg="brown1-fade-light"></i>
-                <span>Pages</span>
-            </a>
-            <a href="">
-                <i data-feather="settings" data-feather-line="1" data-feather-size="21" data-feather-color="gray2-dark"
-                    data-feather-bg="gray2-fade-light"></i>
-                <span>Settings</span>
-            </a>
-            <div class="clear"></div>
+        <div style="z-index: 0;" id="footer-menu" class="footer-menu-5-icons footer-menu-style-1">
+            <a href="#">
+                <i class="fas fa-university" aria-hidden="true" data-feather-bg="blue2-fade-dark"></i>
+                <span>RPP/SILABUS</span>
+                <strong></strong></a>
+            <a onclick="backHome()">
+                <i class="fas fa-user-alt" aria-hidden="true" data-feather-bg="blue2-fade-dark"></i>
+                <span>My Profile</span>
+                <strong></strong></a>
+            <a href="#" class="active-nav4">
+                <i class="fa fa-qrcode" aria-hidden="true" data-feather-bg="blue2-fade-dark"></i>
+                <span>Absensi Kelas</span>
+                <strong></strong></a>
+
+            <a href="#">
+                <i class="fas fa-calendar-alt" aria-hidden="true" data-feather-bg="blue2-fade-dark"></i>
+                <span>Penjadwalan</span>
+                <strong></strong></a>
+            <a href="#">
+                <i class="fas fa-stream" aria-hidden="true" data-feather-bg="blue2-fade-dark"></i>
+                <span>More Menu</span>
+                <strong></strong></a>
         </div>
 
         <!-- Main Sidebar Menu-->
@@ -125,29 +151,71 @@
         </div>
         <div class="menu-hider"></div>
     </div>
-    <script type="text/javascript" src="../scripts/jquery.js"></script>
+    <script type="text/javascript" src="../scripts/uri.js"></script>
+    <script type="text/javascript" src="../scripts/apiServices.js"></script>
     <script type="text/javascript" src="../scripts/instascan.min.js"></script>
     <script type="text/javascript" src="../scripts/plugins.js"></script>
     <script type="text/javascript" src="../scripts/custom.js"></script>
+    <script type="text/javascript" src="../scripts/absensi.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
     <script type="text/javascript">
+        // check apakah checkbox tercentang
+        $(document).on('change', '.checkbox', function () {
+            if (this.checked) {
+                this.value = 1;
+            }
+        });
+
+
+        if (localStorage.getItem('data-siswa')) {
+            $("#btn-data-siswa").html(
+                `<div id="btn-data-siswa" style="margin-top: 120px;margin-left:20px;margin-right: 20px;"><a href="#" onclick="onSiswa()" class="button button-xs round-small shadow-large button-border button-full border-green2-dark bg-green2-dark color-theme bg-transparent bottom-0"><i class="fa fa-sign-out mr-10"></i>Absensi Siswa</a></div>`
+            );
+        } else {
+            localStorage.removeItem('data-siswa');
+        }
+
         let scanner = new Instascan.Scanner({
             video: document.getElementById('preview')
         });
+
         scanner.addListener('scan', function (content) {
-            console.log(content);
+            try {
+                var id_ruang = atob(atob(atob(atob(atob(atob(content))))));
+                _storeAbsensiGuru(id_ruang);
+            } catch {
+                console.error();
+                swal.fire({
+                    title: 'Error',
+                    text: 'Error scanning',
+                    icon: 'error'
+                });
+            }
+
         });
         Instascan.Camera.getCameras().then(function (cameras) {
             if (cameras.length > 0) {
-                scanner.start(cameras[0]);
+                if (cameras.length > 1) {
+                    // kamera belakang
+                    scanner.start(cameras[1]);
+                } else {
+                    // kamera depan
+                    scanner.start(cameras[0]);
+                }
             } else {
-                console.error('No cameras found.');
+                swal.fire({
+                    title: 'Warning',
+                    text: 'Camera not found',
+                    icon: 'warning'
+                });
             }
         }).catch(function (e) {
             console.error(e);
         });
 
         function backHome() {
-            location.href = "../index.html";
+            location.href = BASE_URL('pages/guru/home.html');
         }
     </script>
 </body>
